@@ -19,11 +19,7 @@ const medController = {
     getById: async (req, res) => {
         try {
             const { id } = req.params
-            const [rows, fields] = await pool.query("select * from posts where id = ?", [id])
-
-            res.json({
-                data: rows
-            })
+            const [rows, fields] = await pool.query("select * from remedios where id = ?", [id])
 
             res.json({
                 data: rows
@@ -57,8 +53,8 @@ const medController = {
             const { nome, fabricante, quantidade, peso } = req.body
             const { id } = req.params
 
-            const sql = "update remedios set where id = ?, nome = ?, fabricante = ?, quantidade = ?, peso = ? "
-            const [rows, fields] = await pool.query(sql, [id, nome, fabricante, quantidade, peso])
+            const sql = "update remedios set nome = ?, fabricante = ?, quantidade = ?, peso = ? where id = ? "
+            const [rows, fields] = await pool.query(sql, [nome, fabricante, quantidade, peso,id])
 
             res.json({
                 data: rows
